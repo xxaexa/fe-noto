@@ -63,7 +63,7 @@ const Update = () => {
   useEffect(() => {
     if (deleteSuccess) {
       toast.success("Successfully Deleted");
-      if (user?._id != 1) {
+      if (user?._id) {
         return navigate("/login");
       } else {
         return navigate("/account");

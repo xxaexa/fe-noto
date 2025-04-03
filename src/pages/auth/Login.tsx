@@ -30,7 +30,6 @@ const Login = () => {
       toast.success("Login Successfully");
       const lastLocation = getLastLocation();
       if (lastLocation) {
-        alert();
         navigate(lastLocation);
       } else {
         navigate("/note");
