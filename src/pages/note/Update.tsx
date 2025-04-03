@@ -16,18 +16,13 @@ const Update = () => {
 
   const [
     updateNote,
-    {
-      isLoading: updating,
-      isError: updateError,
-      isSuccess: updateSuccess,
-      error,
-    },
+    { isLoading: updating, isError: updateError, isSuccess: updateSuccess },
   ] = useUpdateNoteMutation();
 
   const [deleteNote, { isLoading: deleting, isSuccess: deleteSuccess }] =
     useDeleteNoteMutation();
 
-  const { data: note, isLoading: loadNote } = useGetNoteQuery(id);
+  const { data: note, isLoading: loadNote } = useGetNoteQuery(id ?? "");
 
   const handleUpdateSubmit = async (values: INoteRequest) => {
     await updateNote(values);
@@ -37,23 +32,20 @@ const Update = () => {
     await deleteNote(id!);
   };
 
-  // Handle Update Success and Error
   useEffect(() => {
     if (updateSuccess) {
       toast.success("Successfully update note");
     } else if (updateError) {
       toast.error("something error");
-      console.log(error as any);
     }
-  }, [updating]);
+  }, [updateError, updateSuccess, updating]);
 
-  // Handle Delete Success and Error
   useEffect(() => {
     if (deleteSuccess) {
       toast.success("Successfully delete note");
       navigate("/note");
     }
-  }, [deleting]);
+  }, [deleteSuccess, deleting, navigate]);
 
   if (loadNote) {
     return <Content>loading..</Content>;

@@ -57,7 +57,7 @@ const Update = () => {
     } else if (updateError) {
       toast.error("Update failed: something went wrong");
     }
-  }, [updating]);
+  }, [updateError, updateSuccess, updating]);
 
   // Handle Delete Success and Error
   useEffect(() => {
@@ -71,7 +71,7 @@ const Update = () => {
     } else if (deleteError) {
       toast.error("Delete failed: something went wrong");
     }
-  }, [deleting]);
+  }, [deleteError, deleteSuccess, deleting, navigate, user?._id]);
 
   return (
     <Content>

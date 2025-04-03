@@ -31,7 +31,6 @@ const customFetchBase: BaseQueryFn<
 > = async (args, api, extraOptions) => {
   const result = await baseQuery(args, api, extraOptions);
 
-  // Cast result.error?.data to TokenErrorResponse for better type safety
   if (
     result.error?.status === 403 &&
     (result.error?.data as TokenErrorResponse)?.error === "Token expired"

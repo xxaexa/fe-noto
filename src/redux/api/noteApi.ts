@@ -18,15 +18,14 @@ export const noteApi = createApi({
       invalidatesTags: ["Note"],
     }),
 
-    getNote: builder.query<INoteResponse[], string | undefined>({
+    getNote: builder.query<INoteResponse, string>({
       query(id) {
         return {
           url: `/notes/${id}`,
         };
       },
       providesTags: [{ type: "Note", id: "LIST" }],
-      transformResponse: (response: INotesApiResponse) => response.data, 
-
+      transformResponse: (response: INotesApiResponse) => response.data[0], 
     }),
 
     getNotes: builder.query<INoteResponse[], void>({
@@ -36,19 +35,20 @@ export const noteApi = createApi({
         };
       },
       providesTags: [{ type: "Note", id: "LIST" }],
-      transformResponse: (response: INotesApiResponse) => response.data, 
+      transformResponse: (response: INotesApiResponse) => response.data || [], 
     }),
 
-    updateNote: builder.mutation<INoteResponse, INoteRequest>({
-      query(values) {
-        return {
-          url: `/notes/${values._id}`,
-          method: "PUT",
-          body: values,
-        };
-      },
-      invalidatesTags: ["Note"],
-    }),
+   updateNote: builder.mutation<INoteResponse, INoteRequest>({
+  query(values) {
+    return {
+      url: `/notes/${values._id}`,
+      method: "PUT",
+      body: values,
+    };
+  },
+  invalidatesTags: ["Note"],
+  transformResponse: (response: INotesApiResponse) => response.data[0], 
+}),
 
     deleteNote: builder.mutation<{ success: boolean; id: string }, string>({
       query(id) {
