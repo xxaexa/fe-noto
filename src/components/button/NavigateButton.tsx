@@ -16,7 +16,7 @@ const NavigateButton = ({ text, icon, url }: NavigateButtonProps) => {
     (segment) => segment.toLowerCase() === url
   );
 
-  let navigateStyle = isActive ? " bg-black text-white" : "  text-black";
+  const navigateStyle = isActive ? " bg-black text-white" : "  text-black";
 
   return (
     <button

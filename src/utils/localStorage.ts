@@ -28,17 +28,3 @@ export const removeUserFromLocalStorage = () => {
   localStorage.removeItem("authData");
 };
 
-export const saveLocation = (location: Location | null) => {
-  if (location?.pathname) {
-    const path = location.pathname + location.search;
-    localStorage.setItem("preLoginPath", path);
-  }
-};
-
-export const getLastLocation = (): string | null => {
-  return localStorage.getItem("preLoginPath");
-};
-
-export const deleteLastLocation = () => {
-  localStorage.removeItem("preLoginPath");
-};

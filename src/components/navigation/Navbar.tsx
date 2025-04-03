@@ -9,7 +9,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-
   const handleNavigate = () => {
     navigate(-1);
   };
@@ -22,8 +21,6 @@ const Navbar = () => {
   };
 
   const renderContent = () => {
-    const location = useLocation();
-
     const staticPathActions: StaticPathActions = {
       "/note": <RegularText text="NOTE" />,
       "/account": (

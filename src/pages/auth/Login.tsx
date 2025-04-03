@@ -8,7 +8,6 @@ import { ILoginRequest } from "../../types";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/features/userSlice";
 import { useNavigate } from "react-router-dom";
-import { getLastLocation, deleteLastLocation } from "../../utils/localStorage";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -28,13 +27,6 @@ const Login = () => {
   useEffect(() => {
     if (isSuccess) {
       toast.success("Login Successfully");
-      const lastLocation = getLastLocation();
-      if (lastLocation) {
-        navigate(lastLocation);
-      } else {
-        navigate("/note");
-      }
-      deleteLastLocation();
     } else if (isError) {
       toast.error("something wrong");
     }
